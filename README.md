@@ -35,7 +35,7 @@ The app ships with 8 built-in reference examples (4 paired sets of clear vs. lis
 5. Review the clarity score and the supporting DSP measurements.
 6. Optionally, label the result (Clear /s/, Mild, Moderate, Severe) to add it to your comparison history — this improves the accuracy of future estimates.
 
-## What this is — and isn't
+## What this is (and isn't)
 
 This is a signal-processing project built to explore whether lisp severity can be estimated from audio alone, not a diagnostic or medical device. It hasn't been validated against clinical ground truth, and the severity labels are based on self-reported, by-ear judgments rather than a speech-language pathologist's assessment. It's best understood as a measurement and comparison tool — useful for tracking change in a single person's /s/ sound over time, or as a starting point for a conversation with someone who actually does this clinically, rather than a replacement for one.
 
