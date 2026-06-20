@@ -28,7 +28,7 @@ The app ships with 8 built-in reference examples (4 paired sets of clear vs. lis
 
 ## How to use it
 
-1. Open `index.html` in a browser (Chrome recommended — microphone recording requires running the page as a real standalone page, not embedded in another tool).
+1. Visit the live site (or open `index.html` directly in a browser if running locally — Chrome recommended, since microphone recording requires running as a real standalone page rather than an embedded preview).
 2. Click record and say a word with a clear /s/ sound, or upload an existing audio file.
 3. Drag the trim handles to isolate just the /s/ portion.
 4. Click Analyze.
@@ -43,5 +43,5 @@ This is a signal-processing project built to explore whether lisp severity can b
 
 - Single self-contained HTML file — no build step, no dependencies, no backend.
 - Uses the Web Audio API for recording and analysis, with a custom JavaScript port of an STFT/FFT pipeline.
-- Labeled comparison history is stored locally in the browser via `localStorage` — it stays on your device and isn't sent anywhere.
+- Labeled comparison history is stored locally in the browser via `localStorage` — it stays on your device, isn't sent anywhere, and isn't shared between different browsers or computers. Each visitor starts with the same 8 built-in examples and builds their own separate history from there.
 - No external network calls of any kind once the page is loaded.
