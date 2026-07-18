@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SpeechyAI</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: Georgia, serif; background: #fff; color: #222; }
+
+  nav {
+    display: flex; align-items: center; background: #1a1a2e;
+    padding: 0 32px; height: 64px; position: sticky; top: 0; z-index: 9999;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4); width: 100%;
+  }
+  .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .nav-logo img { width: 48px; height: 48px; border-radius: 12px; object-fit: contain; background: transparent; }
+  .nav-logo-text { color: #ffffff; font-family: Georgia, serif; font-size: 13px; letter-spacing: 0.02em; white-space: nowrap; max-width: 480px; overflow: hidden; text-overflow: ellipsis; }
+  .nav-links { display: flex; gap: 0; margin-left: auto; }
+  .nav-links a {
+    color: #ccc; text-decoration: none; font-family: Arial, sans-serif;
+    font-size: 14px; letter-spacing: 0.05em; padding: 0 22px; height: 64px;
+    display: flex; align-items: center; transition: background 0.2s, color 0.2s;
+    text-transform: uppercase;
+  }
+  .nav-links a:hover, .nav-links a.active { background: #7c3aed; color: #fff; }
+
+  .hero { position: relative; width: 100%; overflow: hidden; }
+  .hero img { width: 100%; display: block; }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, rgba(10,5,30,0.3) 0%, rgba(10,5,30,0.6) 100%);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-title {
+    font-family: Georgia, serif; font-size: 64px; font-weight: bold;
+    color: #ffffff; text-shadow: 0 2px 20px rgba(0,0,0,0.8);
+    letter-spacing: 0.02em;
+  }
+  .hero-title span { color: #c4b5fd; }
+
+  .content-section { background: #f0f2f5; padding: 56px 48px 64px; }
+  .section-block { max-width: 760px; margin: 0 auto 56px; text-align: left; }
+  .section-block:last-child { margin-bottom: 0; }
+  .section-heading {
+    font-family: Georgia, serif; font-size: 30px; font-weight: bold;
+    color: #7c3aed; margin-bottom: 20px;
+  }
+  .section-placeholder { font-family: Georgia, serif; font-size: 18px; color: #333; line-height: 1.85; }
+
+  .try-it-link { display: inline-block; text-decoration: none; transition: transform 0.2s; }
+  .try-it-link:hover { transform: scale(1.03); }
+  .try-it-link img { width: 220px; border-radius: 20px; box-shadow: 0 8px 32px rgba(124,58,237,0.25); display: block; margin-bottom: 16px; }
+  .try-it-label { font-family: Georgia, serif; font-size: 18px; color: #7c3aed; font-weight: bold; }
+
+  #home { display: block; }
+  #home.hidden { display: none; }
+  .page { display: none; background: #f0f2f5; min-height: 60vh; }
+  .page.active { display: block; }
+
+  .coming-wrap { padding: 100px 48px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+  .coming-icon { font-size: 64px; margin-bottom: 24px; }
+  .coming-title { font-family: Georgia, serif; font-size: 36px; font-weight: bold; color: #7c3aed; margin-bottom: 14px; }
+  .coming-sub { font-family: Arial, sans-serif; font-size: 16px; color: #555; max-width: 420px; }
+
+  footer { background: #2a2a2a; color: #e0e0e0; text-align: center; padding: 28px 24px 22px; }
+  footer .footer-main { font-family: Georgia, serif; font-size: 17px; font-weight: bold; letter-spacing: 0.04em; margin-bottom: 8px; }
+  footer .footer-sub { font-family: Arial, sans-serif; font-size: 13px; color: #aaa; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#" onclick="showPage('home'); setActive('nav-home'); return false;">
+    <img src="icon.png" alt="Speechy Robot">
+    <span class="nav-logo-text">SpeechyAI &mdash; Mathematical Lateral /s/ Lisp Severity Diagnostic Tool</span>
+  </a>
+  <div class="nav-links">
+    <a href="#" class="active" id="nav-home" onclick="showPage('home'); setActive('nav-home'); return false;">Home</a>
+    <a href="#" id="nav-leadership" onclick="showPage('leadership'); setActive('nav-leadership'); return false;">Leadership</a>
+    <a href="#" id="nav-impact" onclick="showPage('impact'); setActive('nav-impact'); return false;">Impact</a>
+  </div>
+</nav>
+
+<div id="home">
+  <div class="hero">
+    <img src="silly (1).png" alt="SpeechyAI hero">
+    <div class="hero-overlay">
+      <div class="hero-title"><span>SpeechyAI</span></div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="section-block">
+      <div class="section-heading">Mission Statement</div>
+      <p class="section-placeholder">SpeechyAI was designed to make speech therapy diagnostics accessible and personal to assist speech language pathologists when observing one's lateral /s/ speech impediment.</p>
+    </div>
+    <div class="section-block">
+      <div class="section-heading">How To Use</div>
+      <p class="section-placeholder">SpeechyAI is a tool designed for individuals with lateral /s/ lisps. It observes a sound's clarity using advanced mathematical techniques and gives a score for conversational clarity, then gives a final assessment on the severity of the lisp based on the /s/ sound. To use SpeechyAI, follow the steps below.
+      <ol style="margin-top:16px; padding-left:20px; font-family:Georgia,serif; font-size:18px; color:#333; line-height:1.85;">
+        <li style="margin-bottom:14px;">First, launch SpeechyAI below under the "Try It Out" section and click "Let's Go" after Speechy prompts you.</li>
+        <li style="margin-bottom:14px;">Move to a quiet space and either record or upload yourself, your child, or your patient saying a word with an /s/ sound. Some examples include snake, soup, sell, sock, and sign. When saying the word, the user should say it normally and not hold the /s/ sound extra long because Speechy will be more critical of the sound. Speechy specializes in conversational speaking, not sustained sounds. Speechy can also analyze /s/ blend sounds. Speechy will not give an accurate assessment if the user does not include an /s/ sound. If the user says a word like rope, for example, then Speechy would not work properly.</li>
+        <li style="margin-bottom:14px;">After the user records or uploads their sound, they are prompted to trim out all remaining noise that is not the /s/. For example, if the user says soup, they would trim out the /oup/ and any noise that occurred before the /s/ sound. This allows Speechy to isolate the /s/ and provide the best analysis it can.</li>
+        <li style="margin-bottom:14px;">Speechy will analyze the speech and generate a quantitative clarity score for the lateral /s/, reflecting how the sound presents in conversation. It will then provide a qualitative severity score determining the clarity level of the lisp, along with exercise suggestions to help the user potentially improve their clarity. The most important aspect of the scores is that they are personal. Speechy is not designed to compare scores from person to person; comparing an adult male's speech clarity to a young female's is like comparing apples to oranges. Speechy's score is a personal reference point. If the user consistently works with a speech language pathologist and reassesses over time, improving scores indicate a clearer /s/ sound.</li>
+      </ol></p>
+    </div>
+    <div class="section-block">
+      <div class="section-heading">Try It Out</div>
+      <a class="try-it-link" href="https://braddocktripoli-create.github.io/LaunchSpeechyAI/" target="_blank">
+        <img src="cute (1).png" alt="Try SpeechyAI">
+        <div class="try-it-label">Launch SpeechyAI →</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div id="leadership" class="page">
+  <div style="background:#f0f2f5; padding:56px 48px 72px;">
+
+    <div style="font-family:Georgia,serif; font-size:30px; font-weight:bold; color:#7c3aed; text-align:center; margin-bottom:48px;">Leadership</div>
+
+    <!-- Photo cards -->
+    <div style="display:flex; gap:32px; justify-content:center; flex-wrap:wrap; max-width:900px; margin:0 auto 56px;">
+
+      <!-- Braddock -->
+      <div style="text-align:center; flex:1; min-width:220px; max-width:260px;">
+        <div style="width:100%; aspect-ratio:3/4; background:#d1d5db; border-radius:8px; margin-bottom:16px;"></div>
+        <div style="font-family:Georgia,serif; font-size:17px; font-weight:bold; color:#111; margin-bottom:6px;">Braddock Tripoli</div>
+        <div style="font-family:Arial,sans-serif; font-size:13px; color:#555;">Founder / President / Developer</div>
+      </div>
+
+      <!-- Stella -->
+      <div style="text-align:center; flex:1; min-width:220px; max-width:260px;">
+        <div style="width:100%; aspect-ratio:3/4; background:#d1d5db; border-radius:8px; margin-bottom:16px;"></div>
+        <div style="font-family:Georgia,serif; font-size:17px; font-weight:bold; color:#111; margin-bottom:6px;">Stella Marutyan</div>
+        <div style="font-family:Arial,sans-serif; font-size:13px; color:#555;">Co-Vice President / Developer</div>
+      </div>
+
+      <!-- Ani -->
+      <div style="text-align:center; flex:1; min-width:220px; max-width:260px;">
+        <div style="width:100%; aspect-ratio:3/4; background:#d1d5db; border-radius:8px; margin-bottom:16px;"></div>
+        <div style="font-family:Georgia,serif; font-size:17px; font-weight:bold; color:#111; margin-bottom:6px;">Ani Horoupian</div>
+        <div style="font-family:Arial,sans-serif; font-size:13px; color:#555;">Co-Vice President / Relations Director</div>
+      </div>
+
+    </div>
+
+    <!-- Descriptions -->
+    <div style="max-width:900px; margin:0 auto; display:flex; flex-direction:column; gap:36px;">
+
+      <div>
+        <div style="font-family:Georgia,serif; font-size:20px; font-weight:bold; color:#7c3aed; margin-bottom:10px;">Braddock Tripoli</div>
+        <p style="font-family:Georgia,serif; font-size:16px; color:#333; line-height:1.85;">Hey! I am Braddock, and I am a rising senior at Mater Dei High School involved in MUN, golf, and many other activities. I founded SpeechyAI because I wanted to apply math and AI to something that serves the community. I have had a lateral /s/ lisp my entire life and worked with speech language pathologists for many years. My experience as a student in Seacliff Elementary's speech program was formative, and I wanted to build something that could support programs and speech language pathologists the way they once supported me.</p>
+      </div>
+
+      <div>
+        <div style="font-family:Georgia,serif; font-size:20px; font-weight:bold; color:#7c3aed; margin-bottom:10px;">Stella Marutyan</div>
+        <p style="font-family:Georgia,serif; font-size:16px; color:#333; line-height:1.85;">Hey! I am Stella, a rising senior at Mater Dei High School with a deep passion for computer science, mathematics, and software development. I joined the team to build SpeechyAI because I love finding creative, technical solutions to real-world challenges. Developing the programming and technology behind our speech analysis tools allowed me to bridge my interest in artificial intelligence with a project that can truly make a positive, accessible impact in our community.</p>
+      </div>
+
+      <div>
+        <div style="font-family:Georgia,serif; font-size:20px; font-weight:bold; color:#7c3aed; margin-bottom:10px;">Ani Horoupian</div>
+        <p style="font-family:Georgia,serif; font-size:16px; color:#333; line-height:1.85;">I am a senior at Mater Dei High School and am actively involved in ASB and Model United Nations. I'm passionate about supporting people with speech impediments because my sister struggled with one for years, and seeing the challenges she faced showed me how important confidence and effective communication are. That experience inspires me to help develop solutions that make communication more accessible and empower others to find their voice.</p>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<div id="impact" class="page">
+  <div style="background:#f0f2f5; padding:56px 48px 72px;">
+
+    <!-- Title -->
+    <div style="font-family:Georgia,serif; font-size:30px; font-weight:bold; color:#7c3aed; text-align:center; margin-bottom:48px;">Impact</div>
+
+    <!-- Quote -->
+    <p style="font-family:Georgia,serif; font-size:17px; color:#888; line-height:1.85; text-align:center; max-width:760px; margin:0 auto 16px;">"The act of empowering others has been the #1 goal in mind throughout the creation of this model. We hope to broaden the horizon of possibilities for the future of Speechy with potential updates and expansions to come. For now, we hope to positively impact our community."</p>
+    <p style="font-family:Georgia,serif; font-size:15px; color:#888; text-align:center; margin-top:16px; margin-bottom:64px;">— Founder Braddock Tripoli</p>
+
+    <!-- Endorsements heading -->
+    <div style="font-family:Georgia,serif; font-size:22px; font-weight:bold; color:#7c3aed; text-align:center; margin-bottom:32px;">Endorsements / Partnerships</div>
+
+    <!-- Sliding ticker -->
+    <div style="overflow:hidden; width:100%; background:#ffffff; border-top:1px solid #e5e7eb; border-bottom:1px solid #e5e7eb; padding:24px 0; margin-bottom:0;">
+      <div style="display:flex; gap:80px; animation:slide 18s linear infinite; width:max-content;">
+        <span style="font-family:Arial,sans-serif; font-size:16px; color:#aaa; white-space:nowrap;">Endorsements / Partnerships to come</span>
+        <span style="font-family:Arial,sans-serif; font-size:16px; color:#aaa; white-space:nowrap;">Endorsements / Partnerships to come</span>
+        <span style="font-family:Arial,sans-serif; font-size:16px; color:#aaa; white-space:nowrap;">Endorsements / Partnerships to come</span>
+        <span style="font-family:Arial,sans-serif; font-size:16px; color:#aaa; white-space:nowrap;">Endorsements / Partnerships to come</span>
+        <span style="font-family:Arial,sans-serif; font-size:16px; color:#aaa; white-space:nowrap;">Endorsements / Partnerships to come</span>
+        <span style="font-family:Arial,sans-serif; font-size:16px; color:#aaa; white-space:nowrap;">Endorsements / Partnerships to come</span>
+        <span style="font-family:Arial,sans-serif; font-size:16px; color:#aaa; white-space:nowrap;">Endorsements / Partnerships to come</span>
+        <span style="font-family:Arial,sans-serif; font-size:16px; color:#aaa; white-space:nowrap;">Endorsements / Partnerships to come</span>
+      </div>
+    </div>
+
+
+    <!-- Bottom image -->
+    <div style="text-align:center; margin-top:56px;">
+      <img src="fun (1).png" alt="SpeechyAI community" style="width:70%; max-width:700px; border-radius:12px; box-shadow:0 4px 24px rgba(124,58,237,0.15);">
+    </div>
+
+  </div>
+</div>
+
+<style>
+@keyframes slide {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+</style>
+
+<footer>
+  <div class="footer-main">SpeechyAI</div>
+  <div class="footer-sub">Empowering Others :)</div>
+</footer>
+
+<script>
+  function showPage(page) {
+    document.getElementById("home").classList.add("hidden");
+    document.querySelectorAll(".page").forEach(el => el.classList.remove("active"));
+    if (page === "home") {
+      document.getElementById("home").classList.remove("hidden");
+    } else {
+      document.getElementById(page).classList.add("active");
+    }
+  }
+  function setActive(id) {
+    document.querySelectorAll(".nav-links a").forEach(a => a.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+  }
+</script>
+</body>
+</html>
